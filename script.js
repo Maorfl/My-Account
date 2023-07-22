@@ -1,21 +1,12 @@
 import Action from "./Classes/Action.js";
 import ActionManager from "./Classes/ActionManager.js";
 
-let food = new Action("income", "Salary", 8000, "10/04/2023");
-let food1 = new Action("expense", "Fruits", 300, "11/04/2023");
-let food2 = new Action("expense", "Electronics", 3500, "12/04/2023");
-let food3 = new Action("income", "Bit", 500, "13/04/2023");
 let actionManager = new ActionManager();
 
-
-if (localStorage.getItem("myActions") == null) {
-    actionManager.addAction(food);
-    actionManager.addAction(food1);
-    actionManager.addAction(food2);
-    actionManager.addAction(food3);
+if (localStorage.getItem("myActions") != null) {
+    actionManager.actions = JSON.parse(localStorage.getItem("myActions")).actions;
+    showActionsInTable();
 }
-else actionManager.actions = JSON.parse(localStorage.getItem("myActions")).actions;
-showActionsInTable();
 
 function showActionsInTable() {
     actionManager.calcBalance();
@@ -68,5 +59,6 @@ window.remove = (id) => {
         showActionsInTable();
     }
 }
+
 
 
